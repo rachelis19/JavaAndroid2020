@@ -9,7 +9,8 @@ import android.widget.Button;
 
 import com.example.service_side.R;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
