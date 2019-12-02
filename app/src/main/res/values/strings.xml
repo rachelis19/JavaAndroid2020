@@ -16,4 +16,20 @@
     <string name="create_a_password">"Your New Password:"</string>
     <string name="Confirm_your_password">Confirm your password</string>
     <string name="you_have">You have successfully registered, Thank you!</string>
+    <string name="enter_the_phone_number">"Enter the recipient number :"</string>
+    <string name="select_data">"Select Date"</string>
+        <string-array name="enum_type">
+            <item>Envelope</item>
+
+            <item>Big package</item>
+
+            <item>Small package</item>
+        </string-array>
+    <string-array name="enum_wieght">
+    <item>Up To 500g</item>
+    <item>Up To 1kg</item>
+    <item>Up To 5kg</item>
+        <item>Up To 20kg</item>
+</string-array>
+
 </resources>
