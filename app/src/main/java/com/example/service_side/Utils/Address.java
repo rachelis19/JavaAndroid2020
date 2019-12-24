@@ -1,4 +1,4 @@
-package com.example.service_side.data.model.entities;
+package com.example.service_side.Utils;
 
 
 public class Address

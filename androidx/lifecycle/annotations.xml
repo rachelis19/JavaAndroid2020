@@ -1,0 +1,5 @@
+<root>
+    <item name='androidx.lifecycle.MutableLiveData'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

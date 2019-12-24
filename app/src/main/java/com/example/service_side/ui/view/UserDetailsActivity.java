@@ -1,4 +1,4 @@
-package com.example.service_side.view;
+package com.example.service_side.ui.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,9 +11,7 @@ import android.widget.Toast;
 
 import com.example.service_side.R;
 
-import java.util.Date;
-
-public class User_Details extends AppCompatActivity {
+public class UserDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +22,14 @@ public class User_Details extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText firstName=findViewById(R.id.firstName);
-                EditText lastName=findViewById(R.id.lastName);
-                EditText password=findViewById(R.id.password);
-                EditText edtEmailId=findViewById(R.id.emailText);
+                EditText firstName=findViewById(R.id.firstNameUser);
+                EditText lastName=findViewById(R.id.lastNameUser);
+                EditText password=findViewById(R.id.passwordNewUser);
+                EditText edtEmailId=findViewById(R.id.emailTextUser);
                 EditText distribution_Company =findViewById(R.id.distribution_Company);
                 //Date dateOfbirth=(Date) findViewById(R.id.dateOfBrith);
                 if(MainActivity.isEmailValid(edtEmailId.getText().toString())) {
-                    Intent startIntent = new Intent(getApplicationContext(), package_details_1.class);
+                    Intent startIntent = new Intent(getApplicationContext(), AddParcelActivity_1.class);
                     startActivity(startIntent);
                 }
                 else

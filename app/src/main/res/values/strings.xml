@@ -16,20 +16,33 @@
     <string name="create_a_password">"Your New Password:"</string>
     <string name="Confirm_your_password">Confirm your password</string>
     <string name="you_have">You have successfully registered, Thank you!</string>
-    <string name="enter_the_phone_number">"Enter the recipient number :"</string>
+    <string name="enter_the_det">"Enter The Recipient Details :"</string>
     <string name="select_data">"Select Date"</string>
-        <string-array name="enum_type">
-            <item>Envelope</item>
+    <string name="enter_parcel_det">Enter Parcel Details :</string>
+    <string-array name="enum_status">
+        <item>Sent</item>
 
-            <item>Big package</item>
+        <item>Someone offered to take your package</item>
 
-            <item>Small package</item>
-        </string-array>
+        <item>On the way</item>
+
+        <item>Accepted</item>
+    </string-array>
+    <string-array name="enum_type">
+        <item>Envelope</item>
+
+        <item>Big package</item>
+
+        <item>Small package</item>
+    </string-array>
     <string-array name="enum_wieght">
-    <item>Up To 500g</item>
-    <item>Up To 1kg</item>
-    <item>Up To 5kg</item>
+        <item>Up To 500g</item>
+        <item>Up To 1kg</item>
+        <item>Up To 5kg</item>
         <item>Up To 20kg</item>
-</string-array>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

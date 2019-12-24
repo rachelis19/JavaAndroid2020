@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
+    tools:context=".ui.view.MainActivity"
     android:background="@drawable/back">
 
     <ImageView
@@ -69,7 +69,7 @@
         app:srcCompat="@drawable/facebook" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/emailUserName"
         android:layout_width="251dp"
         android:layout_height="30dp"
         android:background="@drawable/edit_text"
@@ -115,7 +115,7 @@
 
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passwordNewUser"
         android:layout_width="251dp"
         android:layout_height="30dp"
         android:background="@drawable/edit_text"
@@ -129,4 +129,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/BTO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
 </androidx.constraintlayout.widget.ConstraintLayout>
