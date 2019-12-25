@@ -16,6 +16,29 @@ import java.util.List;
 
 public class Converters
 {
+
+
+    @TypeConverter
+    public static ParcelStatus stringToStatus(String status) {
+        if (status =="ACCEPTED") {
+            return ParcelStatus.ACCEPTED;
+        } else if (status =="SENT") {
+            return ParcelStatus.SENT;
+        } else if (status =="ON_WAY") {
+            return ParcelStatus.ON_WAY;
+        } else if (status =="SOMEONE_OFFERED") {
+            return ParcelStatus.SOMEONE_OFFERED;
+        }else {
+            return null;
+        }
+    }
+
+    @TypeConverter
+    public static String statusToString(ParcelStatus status) {
+        if (status==null)
+            return null;
+        return  status.toString();
+    }
     @TypeConverter
     public String FromParcelToString(ParcelType p)
     {
@@ -39,6 +62,8 @@ public class Converters
         }
         return null;
     }
+
+
     @TypeConverter
     public String FromParceWlToString(ParcelWeight w)
     {

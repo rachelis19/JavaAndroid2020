@@ -131,7 +131,8 @@ public class AddParcelActivity_2 extends AppCompatActivity
             parcel.setReceipt_date(receiptDate.getText().toString());
             parcel.setParcelType(CheckTypeOfParcel());
             parcel.setParcelWeight(CheckWeight());
-            parcel.setParcelStatus(ParcelStatus.ON_WAY);
+            parcel.setParcelStatus(ParcelStatus.ACCEPTED);
+            parcel.setParcelId("1");
         }
         catch (Exception e)
         {

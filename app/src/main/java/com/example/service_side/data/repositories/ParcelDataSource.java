@@ -47,7 +47,7 @@ public  class ParcelDataSource
     public void addParcel(Parcel parcel)
     {
             String key=parcelRef.push().getKey();
-            parcel.setIdParcel(key);
+           parcel.setParcelId(key);
             parcelRef.child(key).setValue(parcel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid)

@@ -23,8 +23,8 @@ public class ParcelViewModel extends ViewModel
 
     public ParcelViewModel() {
 
-        parcelRepository = new ParcelRepository(ApplicationContextProvider.getContext());
-        allParcels = parcelRepository.getAllParcel();
+        this.parcelRepository = new ParcelRepository(ApplicationContextProvider.getContext());
+        this.allParcels = parcelRepository.getAllParcel();
     }
 
     public LiveData<ParcelChange> getParcelChange() {

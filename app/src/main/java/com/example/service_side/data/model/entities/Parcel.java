@@ -75,7 +75,8 @@ public class Parcel implements Serializable {
     public String getParcelId() {
         return parcelId;
     }
-    public void setIdParcel(String idParcel)
+    public void setParcelId(String idParcel)
+
     {
         this.parcelId = idParcel;
     }
