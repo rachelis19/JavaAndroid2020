@@ -54,7 +54,7 @@ public class AddParcelActivity_1 extends AppCompatActivity {
                 if(!TextUtils.isEmpty(phoneNumberIn.getText().toString()) && !TextUtils.isEmpty(firstNameIn.getText().toString()) && !TextUtils.isEmpty(lastNameIn.getText().toString()) && !TextUtils.isEmpty(addressIn.getText().toString())) {
                     if (isEmailValid(emailTextIn.getText().toString())) {
                         SaveInfoFromUi();
-                        Intent startIntent = new Intent(getApplicationContext(), AddParcelActivity_2.class);
+                        Intent startIntent = new Intent(getApplicationContext(),AddParcelActivity_2.class);
                         startIntent.putExtra("com.example.service_side.ui.view.Parcel", newParcel);
                         startActivity(startIntent);
                     }

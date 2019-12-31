@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.service_side.R;
+import com.example.service_side.Utils.ApplicationContextProvider;
 import com.example.service_side.Utils.ParcelChange;
 import com.example.service_side.data.model.entities.Parcel;
 import com.example.service_side.data.model.entities.ParcelStatus;
@@ -38,8 +39,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class AddParcelActivity_2 extends AppCompatActivity
-{
+public class AddParcelActivity_2 extends AppCompatActivity {
     private static final String TAG = "AddParcelActivity_2";
     private RadioGroup radioGroup;
     private RadioButton radioButton;
@@ -59,6 +59,7 @@ public class AddParcelActivity_2 extends AppCompatActivity
     private CheckBox fragile;
     private Parcel parcel;
     private ParcelViewModel parcelViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -66,12 +67,12 @@ public class AddParcelActivity_2 extends AppCompatActivity
         setContentView(R.layout.activity_add_parcel_2);
         Intent intent = getIntent();
         parcel = new Parcel();
-        parcel= (Parcel)intent.getSerializableExtra("com.example.service_side.ui.view.Parcel");
-         findViews();
-          createSpinner();
-          calendarSetUp();
-          btnAddClick();
-         parcelViewModel.getParcelChange().observe(this, new Observer<ParcelChange>() {
+        parcel = (Parcel) intent.getSerializableExtra("com.example.service_side.ui.view.Parcel");
+        findViews();
+        createSpinner();
+        calendarSetUp();
+        btnAddClick();
+        parcelViewModel.getParcelChange().observe(this, new Observer<ParcelChange>() {
             @Override
             public void onChanged(ParcelChange parcelChange) {
                 if(parcelChange.success==true)
@@ -119,7 +120,6 @@ public class AddParcelActivity_2 extends AppCompatActivity
         approval_btn = (Button) findViewById(R.id.approvalBtn);
         spinner = (Spinner) findViewById(R.id.spinner_wieght);
         fragile = (CheckBox) findViewById(R.id.fragile_check);
-        parcelViewModel=new ParcelViewModel();
         parcelViewModel=ViewModelProviders.of(this).get(ParcelViewModel.class);
     }
     private void SaveInfoFromUi() {
@@ -169,7 +169,7 @@ public class AddParcelActivity_2 extends AppCompatActivity
         return null;
     }
 
-        public ParcelType CheckTypeOfParcel() {
+    public ParcelType CheckTypeOfParcel() {
         int radioId = radioGroup.getCheckedRadioButtonId();
 
         radioButton = findViewById(radioId);
@@ -238,19 +238,9 @@ public class AddParcelActivity_2 extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -24,6 +24,7 @@ import java.util.List;
 
 public  class ParcelDataSource
 {
+    MutableLiveData<ParcelChange> parcelChange;
     public interface NotifyDataChange<T>
     {
         void OnDataChanged(T obj);
@@ -32,7 +33,6 @@ public  class ParcelDataSource
     }
     static DatabaseReference parcelRef;
     static List<Parcel> parcelList;
-    MutableLiveData<ParcelChange> parcelChange;
     private static ChildEventListener parcelRefChildEventListener;
     static
     {
@@ -43,11 +43,12 @@ public  class ParcelDataSource
      public ParcelDataSource()
      {
          parcelChange=new MutableLiveData<>();
+
      }
     public void addParcel(Parcel parcel)
     {
             String key=parcelRef.push().getKey();
-           parcel.setParcelId(key);
+            parcel.setParcelId(key);
             parcelRef.child(key).setValue(parcel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid)
@@ -79,10 +80,11 @@ public  class ParcelDataSource
                 return;
             }
             parcelList.clear();
-            parcelRefChildEventListener=new ChildEventListener() {
+             parcelRefChildEventListener=new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     Parcel parcel=dataSnapshot.getValue(Parcel.class);
+
                     if(parcel.getParcelStatus()== ParcelStatus.ACCEPTED)
                     {
                         parcelList.add(parcel);
@@ -114,6 +116,7 @@ public  class ParcelDataSource
 
                 }
             };
+           // parcelRef.addChildEventListener(parcelRefChildEventListener);
         }
     }
 

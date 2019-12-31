@@ -1,6 +1,7 @@
 package com.example.service_side.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -21,7 +22,7 @@ public class HistoryViewModel extends ViewModel
        this.parcelRepository=new ParcelRepository(ApplicationContextProvider.getContext());
 
     }
-    public LiveData<List<Parcel>>  getAllParcel() {
+    /*public LiveData<List<Parcel>>  getAllParcel() {
     return parcelRepository.getAllParcel();
-}
+}*/
 }

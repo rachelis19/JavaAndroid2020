@@ -13,38 +13,51 @@ import androidx.room.Room;
 
 import com.example.service_side.Utils.ParcelChange;
 import com.example.service_side.data.model.entities.Parcel;
+import com.example.service_side.data.model.entities.ParcelStatus;
+import com.example.service_side.viewModel.HistoryViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ParcelRepository
+public class ParcelRepository extends Application
 {
     private ParcelDataSource  parcelDataSource;
     private HistoryDataSource historyDataSource=null;
     private ParcelDAO parcelDAO;
     private MutableLiveData<List<Parcel>> allParcels;
-    private static Context mContext;
+    //private static Context mContext;
 
      public ParcelRepository(Context app) {
-         parcelDAO = historyDataSource.getParcelDAO();
-         allParcels = new MutableLiveData<>();
-         allParcels.postValue((List<Parcel>) parcelDAO.getAllParcels());
 
-         parcelDataSource = new ParcelDataSource();
-         historyDataSource = Room.databaseBuilder(app, HistoryDataSource.class, "myRoom")
+            historyDataSource = Room.databaseBuilder(app, HistoryDataSource.class, "myRoom")
                  .allowMainThreadQueries().build();
-         parcelDataSource.notifyToParcelList(new ParcelDataSource.NotifyDataChange<List<Parcel>>() {
+            parcelDAO = historyDataSource.getParcelDAO();
+            allParcels =new MutableLiveData<>();
+            allParcels.postValue(parcelDAO.getAllParcels());
+            /*Parcel p=new Parcel();
+            p.setParcelId("212121");
+            p.setParcelStatus(ParcelStatus.ACCEPTED);
+            parcelDAO.Insert(p);*/
+            allParcels.postValue(parcelDAO.getAllParcels());
+            parcelDataSource=new ParcelDataSource();
+
+
+
+        parcelDataSource.notifyToParcelList(new ParcelDataSource.NotifyDataChange<List<Parcel>>() {
              @Override
              public void OnDataChanged(List<Parcel> parcelList) {
                  for (int i = 0; i < parcelList.size(); i++) {
                      if (parcelDAO.getParcelById(parcelList.get(i).getParcelId()) == null) {
-                         parcelDAO.insert(parcelList.get(i));
+                         parcelDAO.Insert(parcelList.get(i));
                      }
                  }
 
-                 allParcels.postValue((List<Parcel>)parcelDAO.getAllParcels());
+                 allParcels.postValue(parcelDAO.getAllParcels());
              }
 
-             @Override
+
+
+            @Override
              public void onFailure(Exception exception)
              {
                //kljko;bt;o/ko
@@ -54,8 +67,8 @@ public class ParcelRepository
      }
 
     public LiveData<List<Parcel>> getAllParcel() {
-        return allParcels;
-    }
+       return allParcels;
+   }
 
 
     public void addParcel(Parcel parcel)

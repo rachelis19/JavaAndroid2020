@@ -18,10 +18,10 @@ import java.util.List;
 @Dao
 public interface ParcelDAO
 {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Parcel parcel);
+    @Insert
+    void Insert(Parcel parcel);
     @Query("SELECT * from parcel_table")
-     LiveData<List<Parcel>> getAllParcels();
+     List<Parcel> getAllParcels();
     @Query("SELECT * FROM parcel_table WHERE parcelId = :id")
      Parcel getParcelById(String id);
 

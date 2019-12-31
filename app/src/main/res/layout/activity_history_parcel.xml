@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.HistoryParcelActivity">
-    <ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/listView"
-    >
-    </ListView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:orientation="horizontal">
+
+    </android.support.v7.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.service_side.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -16,17 +17,16 @@ import com.example.service_side.data.repositories.ParcelRepository;
 
 import java.util.List;
 
-public class ParcelViewModel extends ViewModel
+public class ParcelViewModel extends AndroidViewModel
 {
     ParcelRepository parcelRepository;
-    LiveData<List<Parcel>> allParcels;
+    Context r=getApplication();
 
-    public ParcelViewModel() {
+    public ParcelViewModel(@NonNull Application application) {
+        super(application);
+        this.parcelRepository = new ParcelRepository(r);
 
-        this.parcelRepository = new ParcelRepository(ApplicationContextProvider.getContext());
-        this.allParcels = parcelRepository.getAllParcel();
     }
-
     public LiveData<ParcelChange> getParcelChange() {
         return parcelRepository.getParcelChange();
     }

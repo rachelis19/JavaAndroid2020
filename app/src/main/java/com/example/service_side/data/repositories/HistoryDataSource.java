@@ -18,6 +18,5 @@ import java.util.List;
 public abstract class HistoryDataSource extends RoomDatabase
 {
    public abstract ParcelDAO getParcelDAO();
-
-
 }
+
