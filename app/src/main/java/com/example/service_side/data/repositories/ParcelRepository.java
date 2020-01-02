@@ -14,6 +14,8 @@ import androidx.room.Room;
 import com.example.service_side.Utils.ParcelChange;
 import com.example.service_side.data.model.entities.Parcel;
 import com.example.service_side.data.model.entities.ParcelStatus;
+import com.example.service_side.data.model.entities.ParcelType;
+import com.example.service_side.data.model.entities.ParcelWeight;
 import com.example.service_side.viewModel.HistoryViewModel;
 
 import java.util.ArrayList;
@@ -33,11 +35,6 @@ public class ParcelRepository extends Application
                  .allowMainThreadQueries().build();
             parcelDAO = historyDataSource.getParcelDAO();
             allParcels =new MutableLiveData<>();
-            allParcels.postValue(parcelDAO.getAllParcels());
-            /*Parcel p=new Parcel();
-            p.setParcelId("212121");
-            p.setParcelStatus(ParcelStatus.ACCEPTED);
-            parcelDAO.Insert(p);*/
             allParcels.postValue(parcelDAO.getAllParcels());
             parcelDataSource=new ParcelDataSource();
 

@@ -25,4 +25,5 @@ public interface ParcelDAO
     @Query("SELECT * FROM parcel_table WHERE parcelId = :id")
      Parcel getParcelById(String id);
 
+
 }

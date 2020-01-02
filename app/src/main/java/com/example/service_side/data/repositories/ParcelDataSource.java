@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public  class ParcelDataSource
     }
     static DatabaseReference parcelRef;
     static List<Parcel> parcelList;
-    private static ChildEventListener parcelRefChildEventListener;
+    private static ValueEventListener parcelRefValueEventListener,tmp;
     static
     {
         FirebaseDatabase database=FirebaseDatabase.getInstance();
@@ -49,10 +50,13 @@ public  class ParcelDataSource
     {
             String key=parcelRef.push().getKey();
             parcel.setParcelId(key);
+            stopNotifyToParcelList();
             parcelRef.child(key).setValue(parcel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid)
                 {
+                    parcelRefValueEventListener=tmp;
+                    parcelRef.addValueEventListener(parcelRefValueEventListener);
                     parcelChange.postValue(new ParcelChange(false,true,false));
                 }
 
@@ -60,6 +64,8 @@ public  class ParcelDataSource
                 @Override
                 public void onFailure(@NonNull Exception e)
                 {
+                    parcelRefValueEventListener=tmp;
+                    parcelRef.addValueEventListener(parcelRefValueEventListener);
                     parcelChange.postValue(new ParcelChange(false,false,true));
                 }
             });
@@ -70,45 +76,34 @@ public  class ParcelDataSource
     {
         return parcelChange;
     }
+
+
     public static void notifyToParcelList(final NotifyDataChange<List<Parcel>> notifyDataChange)
     {
         if(notifyDataChange!=null)
         {
-            if(parcelRefChildEventListener!=null)
+            if(parcelRefValueEventListener!=null)
             {
                 notifyDataChange.onFailure(new Exception("first unNotify parcel list"));
                 return;
             }
             parcelList.clear();
-             parcelRefChildEventListener=new ChildEventListener() {
+            parcelRefValueEventListener=new ValueEventListener() {
                 @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Parcel parcel=dataSnapshot.getValue(Parcel.class);
-
-                    if(parcel.getParcelStatus()== ParcelStatus.ACCEPTED)
-                    {
-                        parcelList.add(parcel);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                {
+                    int size=parcelList.size();
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        Parcel parcel = data.getValue(Parcel.class);
+                        if(parcel.getParcelStatus()== ParcelStatus.ACCEPTED){
+                            if(!(parcelList.contains(parcel))){
+                                parcelList.add(parcel);
+                            }
+                        }
+                    }
+                    if(size<parcelList.size()){//Update only after all the packages have come in and not on each package separately
                         notifyDataChange.OnDataChanged(parcelList);
                     }
-                }
-
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Parcel parcel = dataSnapshot.getValue(Parcel.class);
-                    if (parcel.getParcelStatus() == ParcelStatus.ACCEPTED) {
-                        parcelList.add(parcel);
-                        notifyDataChange.OnDataChanged(parcelList);
-                    }
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 }
 
                 @Override
@@ -116,14 +111,16 @@ public  class ParcelDataSource
 
                 }
             };
-           // parcelRef.addChildEventListener(parcelRefChildEventListener);
+
+           parcelRef.addValueEventListener(parcelRefValueEventListener);
         }
     }
 
     public static void stopNotifyToParcelList() {
-        if (parcelRefChildEventListener != null) {
-            parcelRef.removeEventListener(parcelRefChildEventListener);
-            parcelRefChildEventListener = null;
+        if (parcelRefValueEventListener!= null) {
+            parcelRef.removeEventListener(parcelRefValueEventListener);
+            tmp=parcelRefValueEventListener;
+            parcelRefValueEventListener=null;
         }
     }
 
